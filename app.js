@@ -1,20 +1,16 @@
+require('dotenv').config();
 const express = require('express');
+const connect = require('./schemas'); // 몽고DB 접속 과정
+
 const app = express();
-const port = 3000;
-
-const goodsRouter = require("./routes/goods");
-const cartsRouter = require("./routes/carts.js");
-
-const connect = require("./schemas");
-connect();
-
 app.use(express.json());
-app.use("/api", [goodsRouter, cartsRouter]);
 
-app.get('/', (req,res) => {
-  res.send('Hello World');
-});
+connect(); // 실제 몽고DB 접속
 
-app.listen(port, () => {
-  console.log(port, '포트로 서버가 열렸어요!');
+// 라우터 설정
+const router = require('./routes/products.router');
+app.use('/api', router);
+
+app.listen(3000, () => {
+    console.log('으로 서버가 열렸습니다.');
 });
