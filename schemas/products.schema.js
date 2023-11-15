@@ -9,7 +9,7 @@ const schema = new mongoose.Schema(
         status: {
             type: String,
             enum: ['FOR_SALE', 'SOLD_OUT'],
-            default: 'SOLD_OUT',
+            default: 'FOR_SALE',
         },
     },
     { timestamps: true },

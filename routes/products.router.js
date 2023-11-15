@@ -39,7 +39,7 @@ router.get('/products', async (req, res) => {
 // 상세 조회
 router.get('/products/:productId', async (req, res) => {
     try {
-        const product = await Product.findById(req, params.productId).select(
+        const product = await Product.findById(req.params.productId).select(
             '_id title content author status createdAt',
         );
 
@@ -57,7 +57,7 @@ router.get('/products/:productId', async (req, res) => {
 // 수정
 router.put('/products/:productId', async (req, res) => {
     try {
-        if (!req.body || req.params) {
+        if (!req.body || !req.params) {
             return res
                 .status(400)
                 .json({ message: '데이터 형식이 올바르지 않습니다.' });
@@ -91,7 +91,7 @@ router.put('/products/:productId', async (req, res) => {
 // 삭제
 router.delete('/products/:productId', async (req, res) => {
     try {
-        if (!req.body || req.params) {
+        if (!req.body || !req.params) {
             return res
                 .status(400)
                 .json({ message: '데이터 형식이 올바르지 않습니다.' });
